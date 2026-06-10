@@ -1,0 +1,30 @@
+#include <PZEM004Tv30.h>
+
+PZEM004Tv30 pzem(Serial2, 17,16);
+
+void setup() {
+    Serial.begin(115200);
+    delay(1000);
+    Serial.println("Starting PZEM test...");
+    pinMode(26,OUTPUT);
+
+}
+
+void loop() {
+  digitalWrite(26,HIGH);
+    float voltage = pzem.voltage();
+    float current = pzem.current();
+    float power = pzem.power();
+    float energy = pzem.energy();
+
+    Serial.print("V=");
+    Serial.print(voltage);
+    Serial.print(" A=");
+    Serial.print(current);
+    Serial.print(" W=");
+    Serial.print(power);
+    Serial.print(" kWh=");
+    Serial.println(energy);
+
+    delay(2000);
+}
